@@ -1,0 +1,316 @@
+{
+  "created_utc": "2026-10-24T07:20:20+00:00",
+  "target": {
+    "column": "Churn",
+    "positive_class": "Yes",
+    "encoding": {
+      "No": 0,
+      "Yes": 1
+    }
+  },
+  "seed": 42,
+  "tensorflow_version": "2.21.0",
+  "raw_features": [
+    "tenure",
+    "MonthlyCharges",
+    "TotalCharges",
+    "gender",
+    "SeniorCitizen",
+    "Partner",
+    "Dependents",
+    "PhoneService",
+    "MultipleLines",
+    "InternetService",
+    "OnlineSecurity",
+    "OnlineBackup",
+    "DeviceProtection",
+    "TechSupport",
+    "StreamingTV",
+    "StreamingMovies",
+    "Contract",
+    "PaperlessBilling",
+    "PaymentMethod"
+  ],
+  "numeric_features": [
+    "tenure",
+    "MonthlyCharges",
+    "TotalCharges"
+  ],
+  "categorical_features": [
+    "gender",
+    "SeniorCitizen",
+    "Partner",
+    "Dependents",
+    "PhoneService",
+    "MultipleLines",
+    "InternetService",
+    "OnlineSecurity",
+    "OnlineBackup",
+    "DeviceProtection",
+    "TechSupport",
+    "StreamingTV",
+    "StreamingMovies",
+    "Contract",
+    "PaperlessBilling",
+    "PaymentMethod"
+  ],
+  "feature_names": [
+    "tenure",
+    "MonthlyCharges",
+    "TotalCharges",
+    "gender_Female",
+    "gender_Male",
+    "SeniorCitizen_No",
+    "SeniorCitizen_Yes",
+    "Partner_No",
+    "Partner_Yes",
+    "Dependents_No",
+    "Dependents_Yes",
+    "PhoneService_No",
+    "PhoneService_Yes",
+    "MultipleLines_No",
+    "MultipleLines_No phone service",
+    "MultipleLines_Yes",
+    "InternetService_DSL",
+    "InternetService_Fiber optic",
+    "InternetService_No",
+    "OnlineSecurity_No",
+    "OnlineSecurity_No internet service",
+    "OnlineSecurity_Yes",
+    "OnlineBackup_No",
+    "OnlineBackup_No internet service",
+    "OnlineBackup_Yes",
+    "DeviceProtection_No",
+    "DeviceProtection_No internet service",
+    "DeviceProtection_Yes",
+    "TechSupport_No",
+    "TechSupport_No internet service",
+    "TechSupport_Yes",
+    "StreamingTV_No",
+    "StreamingTV_No internet service",
+    "StreamingTV_Yes",
+    "StreamingMovies_No",
+    "StreamingMovies_No internet service",
+    "StreamingMovies_Yes",
+    "Contract_Month-to-month",
+    "Contract_One year",
+    "Contract_Two year",
+    "PaperlessBilling_No",
+    "PaperlessBilling_Yes",
+    "PaymentMethod_Bank transfer (automatic)",
+    "PaymentMethod_Credit card (automatic)",
+    "PaymentMethod_Electronic check",
+    "PaymentMethod_Mailed check"
+  ],
+  "n_features": 46,
+  "categories": {
+    "gender": [
+      "Female",
+      "Male"
+    ],
+    "SeniorCitizen": [
+      "No",
+      "Yes"
+    ],
+    "Partner": [
+      "No",
+      "Yes"
+    ],
+    "Dependents": [
+      "No",
+      "Yes"
+    ],
+    "PhoneService": [
+      "No",
+      "Yes"
+    ],
+    "MultipleLines": [
+      "No",
+      "No phone service",
+      "Yes"
+    ],
+    "InternetService": [
+      "DSL",
+      "Fiber optic",
+      "No"
+    ],
+    "OnlineSecurity": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "OnlineBackup": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "DeviceProtection": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "TechSupport": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "StreamingTV": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "StreamingMovies": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "Contract": [
+      "Month-to-month",
+      "One year",
+      "Two year"
+    ],
+    "PaperlessBilling": [
+      "No",
+      "Yes"
+    ],
+    "PaymentMethod": [
+      "Bank transfer (automatic)",
+      "Credit card (automatic)",
+      "Electronic check",
+      "Mailed check"
+    ]
+  },
+  "numeric_ranges": {
+    "tenure": [
+      0.0,
+      72.0
+    ],
+    "MonthlyCharges": [
+      18.4,
+      118.75
+    ],
+    "TotalCharges": [
+      0.0,
+      8684.8
+    ]
+  },
+  "split": {
+    "train": 4930,
+    "validation": 1056,
+    "test": 1057,
+    "stratified": true,
+    "ratio": "70/15/15"
+  },
+  "architecture": "Input -> Dense(64,relu) -> Dropout(0.30) -> Dense(32,relu) -> Dropout(0.20) -> Dense(1,sigmoid)",
+  "training": {
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "loss": "binary_crossentropy",
+    "batch_size": 32,
+    "max_epochs": 100,
+    "early_stopping_patience": 10,
+    "epochs_run": 19,
+    "best_epoch": 9
+  },
+  "class_weights": {
+    "minority_share_train": 0.2653,
+    "cutoff": 0.4,
+    "used": true,
+    "rationale": "minority class share is below the cutoff, so 'balanced' class weights are applied to the training loss only",
+    "weights": {
+      "0": 0.680563224737714,
+      "1": 1.8845565749235473
+    }
+  },
+  "threshold": {
+    "value": 0.54,
+    "selection": "maximize churn-class F1 on the validation set",
+    "validation_f1": 0.6287339971550497
+  },
+  "history": {
+    "accuracy": [
+      0.7073022127151489,
+      0.7346855998039246,
+      0.7385395765304565,
+      0.7425963282585144,
+      0.7507099509239197,
+      0.7519269585609436,
+      0.7553752660751343,
+      0.7496957182884216,
+      0.7425963282585144,
+      0.7513184547424316,
+      0.753346860408783,
+      0.7498985528945923,
+      0.7572008371353149,
+      0.7496957182884216,
+      0.7537525296211243,
+      0.7535496950149536,
+      0.7582150101661682,
+      0.7647058963775635,
+      0.7569979429244995
+    ],
+    "loss": [
+      0.5666230916976929,
+      0.5213611125946045,
+      0.5044370293617249,
+      0.49827566742897034,
+      0.4943132698535919,
+      0.4913586974143982,
+      0.4882481098175049,
+      0.48720401525497437,
+      0.4842636287212372,
+      0.4837474524974823,
+      0.479146271944046,
+      0.48048534989356995,
+      0.47564497590065,
+      0.47493889927864075,
+      0.47945356369018555,
+      0.47682836651802063,
+      0.47299349308013916,
+      0.4694296419620514,
+      0.4716525077819824
+    ],
+    "val_accuracy": [
+      0.7121211886405945,
+      0.71875,
+      0.720643937587738,
+      0.7320075631141663,
+      0.7329545617103577,
+      0.7348484992980957,
+      0.7272727489471436,
+      0.7301136255264282,
+      0.7376893758773804,
+      0.7405303120613098,
+      0.7414772510528564,
+      0.7339015007019043,
+      0.7367424368858337,
+      0.7339015007019043,
+      0.7329545617103577,
+      0.7339015007019043,
+      0.7405303120613098,
+      0.7424242496490479,
+      0.7310606241226196
+    ],
+    "val_loss": [
+      0.5464102029800415,
+      0.5329681038856506,
+      0.5242270827293396,
+      0.514683723449707,
+      0.5191675424575806,
+      0.5148084163665771,
+      0.5205761194229126,
+      0.5181357264518738,
+      0.5071792602539062,
+      0.5082312822341919,
+      0.5073789954185486,
+      0.5104708075523376,
+      0.5093975067138672,
+      0.5094568133354187,
+      0.5103847980499268,
+      0.5123737454414368,
+      0.5118894577026367,
+      0.508194088935852,
+      0.5161105990409851
+    ]
+  }
+}
